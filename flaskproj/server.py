@@ -1,9 +1,10 @@
 from flask import Flask, Blueprint, render_template
-from . import db
+# from . import db
 import requests
 from collections import defaultdict
 from sqlalchemy import inspect
-from .database import BTC,ETH,XMR
+from .database import BTC,ETH,XMR,db
+import pandas as pd
 # from flask_login import login_required, current_user
 
 def dbConfig():
@@ -52,8 +53,8 @@ def get_crypto():
     print(data)
     return data
 
-dbConfig()
-get_crypto()
+# dbConfig()
+# get_crypto()
 # ----------------------------------------------
 # server
 # ----------------------------------------------
