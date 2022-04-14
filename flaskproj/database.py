@@ -37,6 +37,7 @@ class XMR(db.Model):
     volumeto = db.Column(db.Float())
     volumefrom = db.Column(db.Float())
 
+
 # def __init__(self,time,high,low,open,close,volumeto,volumefrom):
 #     self.time = time
 #     self.high = high
