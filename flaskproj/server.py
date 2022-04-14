@@ -1,8 +1,17 @@
 from flask import Flask, Blueprint, render_template
 from . import db
-from flask_login import login_required, current_user
+import requests
+from collections import defaultdict
+from sqlalchemy import inspect
+from .database import BTC,ETH,XMR
+# from flask_login import login_required, current_user
 
 def dbConfig():
+    api_key='api_key={ea0232c4ea8a3007655f1518de6af8ea6c4a5e546ddf83988ec885db9600a11e}'
+    btcUrl='https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&allData=true&'
+    ethUrl='https://min-api.cryptocompare.com/data/v2/histoday?fsym=ETH&tsym=USD&allData=true&'
+    xmrUrl='https://min-api.cryptocompare.com/data/v2/histoday?fsym=XMR&tsym=USD&allData=true&'
+    
     resBTC = requests.get(btcUrl+api_key).json()['Data']['Data']
     resETH = requests.get(ethUrl+api_key).json()['Data']['Data']
     resXMR = requests.get(xmrUrl+api_key).json()['Data']['Data']
@@ -43,6 +52,8 @@ def get_crypto():
     print(data)
     return data
 
+dbConfig()
+get_crypto()
 # ----------------------------------------------
 # server
 # ----------------------------------------------
@@ -50,7 +61,7 @@ def get_crypto():
 server = Blueprint('server',__name__)
 
 @server.route("/")
-@login_required
+# @login_required
 def hello():
     return render_template('login.html')
 
